@@ -4,4 +4,14 @@
 
 
 def CheckChangeOnUpload(input_api, output_api):
-  return input_api.canned_checks.CheckChangedLUCIConfigs(input_api, output_api)
+  results = []
+  results += input_api.RunTests(
+                 input_api.canned_checks.CheckLucicfgGenOutput(input_api,
+                                                               output_api,
+                                                               'main.star')
+             )
+  results += input_api.RunTests(
+                 input_api.canned_checks.CheckChangedLUCIConfigs(input_api,
+                                                                 output_api)
+             )
+  return results
