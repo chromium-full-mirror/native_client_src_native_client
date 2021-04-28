@@ -110,6 +110,7 @@ luci.cq(
 luci.cq_group(
     watch = cq.refset(
         repo = repo_path,
+        refs = ["refs/heads/main"],
     ),
     name = "nacl",
     retry_config = cq.retry_config(
