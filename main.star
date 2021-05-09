@@ -13,9 +13,9 @@ cipd_package = \
 # Enable LUCI Realms support.
 lucicfg.enable_experiment("crbug.com/1085650")
 
-# Launch 0% of Swarming tasks for builds in "realms-aware mode"
+# Launch 20% of Swarming tasks for builds in "realms-aware mode"
 # TODO(tandrii): ramp this up to 100.
-luci.builder.defaults.experiments.set({"luci.use_realms": 0})
+luci.builder.defaults.experiments.set({"luci.use_realms": 20})
 
 # Tell lucicfg what files it is allowed to touch
 lucicfg.config(
