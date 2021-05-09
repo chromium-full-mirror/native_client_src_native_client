@@ -10,6 +10,13 @@ service_account_domain = "chops-service-accounts.iam.gserviceaccount.com"
 cipd_package = \
     "infra/recipe_bundles/chromium.googlesource.com/chromium/tools/build"
 
+# Enable LUCI Realms support.
+lucicfg.enable_experiment("crbug.com/1085650")
+
+# Launch 0% of Swarming tasks for builds in "realms-aware mode"
+# TODO(tandrii): ramp this up to 100.
+luci.builder.defaults.experiments.set({"luci.use_realms": 0})
+
 # Tell lucicfg what files it is allowed to touch
 lucicfg.config(
     config_dir = "generated",
@@ -20,6 +27,7 @@ lucicfg.config(
         "luci-milo.cfg",
         "luci-scheduler.cfg",
         "project.cfg",
+        "realms.cfg",
     ],
     fail_on_warnings = True,
     lint_checks = [
@@ -67,6 +75,33 @@ luci.project(
             groups = "project-nacl-tryjob-access",
         ),
     ],
+)
+
+# Allow troopers and NaCl admins to use LED on all builders and inside
+# toolchain pool.
+# NOTE: The try & ci builders are using shared luci.flex.try&ci pools,
+# which are configured elsewhere.
+luci.realm(
+    name = "pools/toolchain",
+    bindings = [
+        luci.binding(
+            roles = "role/swarming.poolOwner",
+            groups = "project-nacl-admins",
+        ),
+        luci.binding(
+            roles = "role/swarming.poolViewer",
+            groups = "all",
+        ),
+        luci.binding(
+            roles = "role/swarming.poolUser",
+            groups = "mdb/chrome-troopers",
+        ),
+    ],
+)
+luci.binding(
+    realm = ["try", "ci"],
+    roles = "role/swarming.taskTriggerer",
+    groups = ["mdb/chrome-troopers", "project-nacl-admins"],
 )
 
 luci.logdog(gs_bucket = "chromium-luci-logdog")
