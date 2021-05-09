@@ -73,24 +73,8 @@ luci.logdog(gs_bucket = "chromium-luci-logdog")
 
 luci.milo(logo = logo_path)
 
-luci.bucket(
-    name = "ci",
-    acls = [
-        acl.entry(
-            roles = acl.BUILDBUCKET_TRIGGERER,
-            users = "luci-scheduler@appspot.gserviceaccount.com",
-        ),
-    ],
-)
-luci.bucket(
-    name = "toolchain",
-    acls = [
-        acl.entry(
-            roles = acl.BUILDBUCKET_TRIGGERER,
-            users = "luci-scheduler@appspot.gserviceaccount.com",
-        ),
-    ],
-)
+luci.bucket(name = "ci")
+luci.bucket(name = "toolchain")
 luci.bucket(
     name = "try",
     acls = [
@@ -197,13 +181,12 @@ def nacl_builder(
         executable = luci.recipe(
             name = recipe_name,
             cipd_package = cipd_package,
-            cipd_version = "refs/heads/master",
+            cipd_version = "refs/heads/main",
         ),
         service_account = service_account,
         caches = caches,
         execution_timeout = execution_timeout,
         dimensions = dimensions,
-        swarming_tags = ["vpython:native-python-wrapper"],
         build_numbers = True,
         properties = properties,
     )
