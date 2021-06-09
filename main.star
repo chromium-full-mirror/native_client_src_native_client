@@ -181,7 +181,7 @@ def nacl_builder(
         },
     }
     if "linux" in dimension_mixins:
-        dimensions["os"] = "Ubuntu-16.04"
+        dimensions["os"] = "Ubuntu-18.04"
     elif "mac" in dimension_mixins:
         dimensions.pop("cores", None)  # Macs can be 4 or 8 cores
         dimensions["os"] = "Mac-10.15"
