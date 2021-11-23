@@ -183,8 +183,8 @@ def nacl_builder(
     if "linux" in dimension_mixins:
         dimensions["os"] = "Ubuntu-18.04"
     elif "mac" in dimension_mixins:
-        dimensions.pop("cores", None)  # Macs can be 4 or 8 cores
-        dimensions["os"] = "Mac-10.15"
+        dimensions["cores"] = "None"  # Macs can be 4 or 8 cores
+        dimensions["os"] = "Mac-11"
         caches = [swarming.cache(path = "osx_sdk", name = "osx_sdk")]
         properties["$build/goma"].pop("enable_ats", None)
     elif "win" in dimension_mixins:
