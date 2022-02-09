@@ -10,11 +10,8 @@ service_account_domain = "chops-service-accounts.iam.gserviceaccount.com"
 cipd_package = \
     "infra/recipe_bundles/chromium.googlesource.com/chromium/tools/build"
 
-# Enable LUCI Realms support.
-lucicfg.enable_experiment("crbug.com/1085650")
-
-# Launch 100% of Swarming tasks for builds in "realms-aware mode"
-luci.builder.defaults.experiments.set({"luci.use_realms": 100})
+# Use LUCI Scheduler BBv2 names and add Scheduler realms configs.
+lucicfg.enable_experiment("crbug.com/1182002")
 
 # Tell lucicfg what files it is allowed to touch
 lucicfg.config(
