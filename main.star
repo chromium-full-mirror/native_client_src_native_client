@@ -213,6 +213,7 @@ def nacl_builder(
             name = recipe_name,
             cipd_package = cipd_package,
             cipd_version = "refs/heads/main",
+            use_python3 = True,
         ),
         service_account = service_account,
         caches = caches,
