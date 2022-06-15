@@ -186,8 +186,6 @@ def nacl_builder(
         properties["$build/goma"].pop("enable_ats", None)
     elif "win" in dimension_mixins:
         dimensions["os"] = "Windows-10"
-    elif "win7" in dimension_mixins:
-        dimensions["os"] = "Windows-7"
 
     if bucket == "toolchain":
         dimensions.pop("cores", None)
@@ -458,25 +456,25 @@ ci_builder(
     name = "win7-64-arm-newlib-opt",
     short_name = "arm",
     category = "win|win7|newlib",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 ci_builder(
     name = "win7-64-glibc-dbg",
     short_name = "dbg",
     category = "win|win7|glibc",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 ci_builder(
     name = "win7-64-glibc-opt",
     short_name = "opt",
     category = "win|win7|glibc",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 ci_builder(
     name = "win7-64-newlib-opt-pnacl",
     short_name = "opt",
     category = "win|win7|pnacl",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 ci_builder(
     name = "win8-64-newlib-dbg",
@@ -699,11 +697,11 @@ try_builder(
 )
 try_builder(
     name = "nacl-win7_64_arm_newlib_opt",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 try_builder(
     name = "nacl-win7_64_newlib_opt_pnacl",
-    dimension_mixins = ["win7"],
+    dimension_mixins = ["win"],
 )
 try_builder(
     name = "nacl-win8-64_newlib_dbg",
