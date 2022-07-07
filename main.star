@@ -169,6 +169,7 @@ def nacl_builder(
             "server_host": "goma.chromium.org",
             "enable_ats": True,
             "rpc_extra_params": "?prod",
+            "use_luci_auth": True,
         },
         "$recipe_engine/isolated": {
             "server": "https://isolateserver.appspot.com",
