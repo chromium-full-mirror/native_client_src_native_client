@@ -10,6 +10,8 @@ service_account_domain = "chops-service-accounts.iam.gserviceaccount.com"
 cipd_package = \
     "infra/recipe_bundles/chromium.googlesource.com/chromium/tools/build"
 
+lucicfg.check_version("1.31.5")
+
 # Use LUCI Scheduler BBv2 names and add Scheduler realms configs.
 lucicfg.enable_experiment("crbug.com/1182002")
 
