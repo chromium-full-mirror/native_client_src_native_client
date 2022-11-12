@@ -280,24 +280,24 @@ def try_builder(
         list_view = "try",
     )
 
-    location_regexp = None
-    location_regexp_exclude = [".+/[+]/pnacl/.+", ".+/[+]/toolchain_build/.+"]
+    filters = [
+        cq.location_filter(path_regexp = "pnacl/.+", exclude = True),
+        cq.location_filter(path_regexp = "toolchain_build/.+", exclude = True),
+    ]
     if cq_type == "always":
-        location_regexp_exclude = None
+        filters = []
     elif cq_type == "toolchain":
-        location_regexp = [
-            ".+/[+]/build/.+",
-            ".+/[+]/buildbot/.+",
-            ".+/[+]/pnacl/.+",
-            ".+/[+]/pynacl/.+",
-            ".+/[+]/toolchain_build/.+",
+        filters = [
+            cq.location_filter(path_regexp = "build/.+"),
+            cq.location_filter(path_regexp = "buildbot/.+"),
+            cq.location_filter(path_regexp = "pnacl/.+"),
+            cq.location_filter(path_regexp = "pynacl/.+"),
+            cq.location_filter(path_regexp = "toolchain_build/.+"),
         ]
-        location_regexp_exclude = None
     luci.cq_tryjob_verifier(
         builder = name,
         cq_group = "nacl",
-        location_regexp = location_regexp,
-        location_regexp_exclude = location_regexp_exclude,
+        location_filters = filters,
         disable_reuse = cq_disable_reuse,
     )
 
