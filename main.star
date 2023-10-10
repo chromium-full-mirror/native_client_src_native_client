@@ -182,13 +182,6 @@ def nacl_builder(
     }
     if "linux" in dimension_mixins:
         dimensions["os"] = "Ubuntu-18.04"
-    elif "mac" in dimension_mixins:
-        dimensions.pop("cores", None)  # Macs can be 4 or 8 cores
-        dimensions["os"] = "Mac-13"
-        caches = [swarming.cache(path = "osx_sdk", name = "osx_sdk")]
-        properties["$build/goma"].pop("enable_ats", None)
-    elif "win" in dimension_mixins:
-        dimensions["os"] = "Windows-10"
 
     if bucket == "toolchain":
         dimensions.pop("cores", None)
@@ -420,78 +413,6 @@ ci_builder(
     dimension_mixins = ["linux"],
 )
 ci_builder(
-    name = "mac-newlib-dbg",
-    short_name = "dbg",
-    category = "mac|newlib",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "mac-newlib-opt",
-    short_name = "opt",
-    category = "mac|newlib",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "mac-arm-newlib-opt",
-    short_name = "arm",
-    category = "mac|newlib",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "mac-glibc-dbg",
-    short_name = "dbg",
-    category = "mac|glibc",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "mac-glibc-opt",
-    short_name = "opt",
-    category = "mac|glibc",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "mac-newlib-opt-pnacl",
-    short_name = "opt",
-    category = "mac|pnacl",
-    dimension_mixins = ["mac"],
-)
-ci_builder(
-    name = "win7-64-arm-newlib-opt",
-    short_name = "arm",
-    category = "win|win7|newlib",
-    dimension_mixins = ["win"],
-)
-ci_builder(
-    name = "win7-64-glibc-dbg",
-    short_name = "dbg",
-    category = "win|win7|glibc",
-    dimension_mixins = ["win"],
-)
-ci_builder(
-    name = "win7-64-glibc-opt",
-    short_name = "opt",
-    category = "win|win7|glibc",
-    dimension_mixins = ["win"],
-)
-ci_builder(
-    name = "win7-64-newlib-opt-pnacl",
-    short_name = "opt",
-    category = "win|win7|pnacl",
-    dimension_mixins = ["win"],
-)
-ci_builder(
-    name = "win8-64-newlib-dbg",
-    short_name = "dbg",
-    category = "win|win10|newlib",
-    dimension_mixins = ["win"],
-)
-ci_builder(
-    name = "win8-64-newlib-opt",
-    short_name = "opt",
-    category = "win|win10|newlib",
-    dimension_mixins = ["win"],
-)
-ci_builder(
     name = "linux_64-newlib-x86_32-pnacl-spec",
     short_name = "32",
     category = "spec|pnacl",
@@ -529,18 +450,6 @@ toolchain_builder(
     dimension_mixins = ["linux", "slow"],
 )
 toolchain_builder(
-    name = "mac-pnacl-x86_32",
-    short_name = "mac",
-    category = "pnacl.release",
-    dimension_mixins = ["mac", "slow"],
-)
-toolchain_builder(
-    name = "win-pnacl-x86_32",
-    short_name = "win",
-    category = "pnacl.release",
-    dimension_mixins = ["win", "slow"],
-)
-toolchain_builder(
     name = "linux-pnacl-x86_64-tests-x86_32",
     short_name = "x86-32",
     category = "pnacl.fyi",
@@ -572,30 +481,6 @@ try_builder(
 try_builder(
     name = "nacl-arm_perf",
     dimension_mixins = ["linux"],
-)
-try_builder(
-    name = "nacl-mac_arm_newlib_opt",
-    dimension_mixins = ["mac"],
-)
-try_builder(
-    name = "nacl-mac_glibc_dbg",
-    dimension_mixins = ["mac"],
-)
-try_builder(
-    name = "nacl-mac_glibc_opt",
-    dimension_mixins = ["mac"],
-)
-try_builder(
-    name = "nacl-mac_newlib_dbg",
-    dimension_mixins = ["mac"],
-)
-try_builder(
-    name = "nacl-mac_newlib_opt",
-    dimension_mixins = ["mac"],
-)
-try_builder(
-    name = "nacl-mac_newlib_opt_pnacl",
-    dimension_mixins = ["mac"],
 )
 try_builder(
     name = "nacl-precise32_glibc_opt",
@@ -667,50 +552,4 @@ try_builder(
     name = "nacl-toolchain-linux-pnacl-x86_64",
     dimension_mixins = ["linux", "slow"],
     cq_type = "toolchain",
-)
-try_builder(
-    name = "nacl-toolchain-mac-pnacl-x86_32",
-    dimension_mixins = ["mac", "slow"],
-    cq_type = "toolchain",
-)
-try_builder(
-    name = "nacl-toolchain-win7-pnacl-x86_64",
-    dimension_mixins = ["win", "slow"],
-    cq_type = "toolchain",
-)
-try_builder(
-    name = "nacl-win32_glibc_opt",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win32_newlib_opt",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win64_glibc_opt",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win64_newlib_dbg",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win64_newlib_opt",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win7_64_arm_newlib_opt",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win7_64_newlib_opt_pnacl",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win8-64_newlib_dbg",
-    dimension_mixins = ["win"],
-)
-try_builder(
-    name = "nacl-win8-64_newlib_opt",
-    dimension_mixins = ["win"],
 )
