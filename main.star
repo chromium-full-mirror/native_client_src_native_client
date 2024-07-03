@@ -161,9 +161,15 @@ def nacl_builder(
         service_account,
         dimension_pool,
         builder_group,
-        slavetype):
+        slavetype,
+        os):
     caches = []
-    dimensions = {"cores": "8", "cpu": "x86-64", "pool": dimension_pool}
+    dimensions = {
+        "cores": "8",
+        "cpu": "x86-64",
+        "os": os,
+        "pool": dimension_pool,
+    }
     properties = {
         "slavetype": slavetype,
         "builder_group": builder_group,
@@ -180,8 +186,6 @@ def nacl_builder(
             "server": "https://chromium-swarm.appspot.com",
         },
     }
-    if "linux" in dimension_mixins:
-        dimensions["os"] = "Ubuntu-18.04"
 
     if bucket == "toolchain":
         dimensions.pop("cores", None)
@@ -238,6 +242,7 @@ def ci_builder(name, short_name, category, dimension_mixins):
         dimension_pool = "luci.flex.ci",
         builder_group = "client.nacl",
         slavetype = "BuilderTester",
+        os = "Ubuntu-20.04",
     )
 
 def toolchain_builder(name, short_name, category, dimension_mixins):
@@ -261,6 +266,7 @@ def toolchain_builder(name, short_name, category, dimension_mixins):
         dimension_pool = "luci.nacl.toolchain",
         builder_group = "client.nacl.toolchain",
         slavetype = "BuilderTester",
+        os = "Ubuntu-18.04",
     )
 
 def try_builder(
@@ -302,6 +308,7 @@ def try_builder(
         dimension_pool = "luci.flex.try",
         builder_group = "tryserver.nacl",
         slavetype = "Trybot",
+        os = "Ubuntu-20.04",
     )
 
 ci_builder(
