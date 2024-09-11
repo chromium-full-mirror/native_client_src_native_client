@@ -402,12 +402,6 @@ ci_builder(
     dimension_mixins = ["linux"],
 )
 ci_builder(
-    name = "linux_64-newlib-mips-pnacl",
-    short_name = "mips",
-    category = "linux|pnacl",
-    dimension_mixins = ["linux"],
-)
-ci_builder(
     name = "linux_64-newlib-arm_qemu-pnacl-dbg",
     short_name = "dbg",
     category = "linux|pnacl|arm",
