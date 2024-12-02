@@ -266,7 +266,7 @@ def toolchain_builder(name, short_name, category, dimension_mixins):
         dimension_pool = "luci.nacl.toolchain",
         builder_group = "client.nacl.toolchain",
         slavetype = "BuilderTester",
-        os = "Ubuntu-18.04",
+        os = "Ubuntu-22.04",
     )
 
 def try_builder(
