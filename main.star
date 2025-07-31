@@ -242,7 +242,7 @@ def ci_builder(name, short_name, category, dimension_mixins):
         dimension_pool = "luci.flex.ci",
         builder_group = "client.nacl",
         slavetype = "BuilderTester",
-        os = "Ubuntu-20.04",
+        os = "Ubuntu-22.04",
     )
 
 def toolchain_builder(name, short_name, category, dimension_mixins):
@@ -308,7 +308,7 @@ def try_builder(
         dimension_pool = "luci.flex.try",
         builder_group = "tryserver.nacl",
         slavetype = "Trybot",
-        os = "Ubuntu-20.04",
+        os = "Ubuntu-22.04",
     )
 
 ci_builder(
